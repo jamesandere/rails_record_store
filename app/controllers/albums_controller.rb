@@ -12,9 +12,10 @@ class AlbumsController < ApplicationController
     def create
         @album = Album.new(album_params)
         if @album.save
+            flash[:notice] = "Album successfully added!"
             redirect_to albums_path
         else
-            render :new    
+            render :new, status: :unprocessable_entity    
         end
     end
 
@@ -31,15 +32,17 @@ class AlbumsController < ApplicationController
     def update
         @album = Album.find(params[:id])
         if @album.update(album_params)
+            flash[:notice] = "Album updated successfully"
             redirect_to albums_path
         else
-            render :edit    
+            render :edit, status: :unprocessable_entity    
         end
     end
 
     def destroy
         @album = Album.find(params[:id])
         @album.destroy
+        flash[:alert] = "Album has been deleted successfully"
         redirect_to albums_path
     end
 

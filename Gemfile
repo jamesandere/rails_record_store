@@ -55,6 +55,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pry'
   gem 'dotenv-rails'
+  gem 'capybara'
 end
 
 group :development do
@@ -72,3 +73,8 @@ group :test do
   gem 'shoulda-matchers'
 end
 
+gem 'bootstrap-sass'
+
+gem 'sassc-rails'
+
+gem 'jquery-rails'

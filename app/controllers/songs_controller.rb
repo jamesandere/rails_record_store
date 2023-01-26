@@ -9,9 +9,10 @@ class SongsController < ApplicationController
         @album = Album.find(params[:album_id])
         @song = @album.songs.new(song_params)
         if @song.save
+            flash[:notice] = "Song has been created successfully"
             redirect_to album_path(@album)
         else
-            render :new    
+            render :new, status: :unprocessable_entity    
         end
     end
 
@@ -30,16 +31,18 @@ class SongsController < ApplicationController
     def update
         @song = Song.find(params[:id])
         if @song.update(song_params)
+            flash[:notice] = "Song updated successfully"
             redirect_to album_path(@song.album)
         else
             @album = Album.find(params[:album_id])
-            render :edit    
+            render :edit, status: :unprocessable_entity    
         end
     end
 
     def destroy
         @song = Song.find(params[:id])
         @song.destroy
+        flash[:notice] = "Song has been deleted"
         redirect_to album_path(@song.album)
     end
 
